@@ -38,7 +38,7 @@ This project is a full-stack Learning Management System (LMS) with integrated at
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/UBITians/learning-management-system.git
+git clone -b development https://github.com/UBITians/learning-management-system.git
 cd learning-management-system
 ```
 
