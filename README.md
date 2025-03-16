@@ -42,26 +42,35 @@ git clone -b development https://github.com/UBITians/learning-management-system.
 cd learning-management-system
 ```
 
-2. **Install dependencies**
+2. **Frontend Setup**
    ```bash
    cd frontend
    npm install
-   cd ../backend
+   ```
+
+3. **Backend Setup**
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    pip install -r requirements.txt
+   python manage.py migrate
    ```
 
-3. **Create a `.env` file**
-   ```bash
-   cp .env.example .env.local
-   ```
+4. **Database Configuration**
 
-4. **Run the development server**
+Update the `settings.py` file in the Django backend to connect to your PostgreSQL database.
+
+5. **Run the development server**
    ```bash
+   # Frontend
    cd frontend
    npm run dev
-   cd ../backend
+
+   # Backend
+   cd backend
    python manage.py runserver
    ```
 
-5. **Access the application**
+6. **Access the application**
    Open your browser and navigate to `http://localhost:3000` to access the application.
