@@ -42,7 +42,7 @@ export default function SignIn() {
   const onSubmit = async (data: SignInFormData) => {
     setLoading(true);
     try {
-      // TODO: Call your API here
+      // Login Logic
       console.log("Signing in with", data);
     } catch (error) {
       console.error("Sign in failed", error);

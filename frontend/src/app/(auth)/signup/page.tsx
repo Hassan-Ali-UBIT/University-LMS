@@ -47,7 +47,7 @@ export default function SignUp() {
   const onSubmit = async (data: SignUpFormData) => {
     setLoading(true);
     try {
-      // TODO: Implement sign-up logic here (e.g., API call)
+      // Signup Logic
       console.log("User signed up with data:", data);
     } catch (error) {
       console.error("Sign-up failed:", error);
