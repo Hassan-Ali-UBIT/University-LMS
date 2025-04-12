@@ -124,7 +124,7 @@ UI Requirements:
   - POST /api/auth/forgot-password
   - POST /api/auth/reset-password
   - GET /api/auth/me
-  - DELETE /api/auth/delete-account
+  - DELETE /api/auth/me
 
 2. Institution Endpoints:
   - POST /api/institutions
