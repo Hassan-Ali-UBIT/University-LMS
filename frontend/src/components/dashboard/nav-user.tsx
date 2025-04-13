@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeSelectorSubMenu } from "@/components/dashboard/sidebar-toggle-theme"
 import { useState } from "react";
+import Link from "next/link"
 export function NavUser({
   user,
 }: {
@@ -86,12 +87,12 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-          
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-           
-                <ThemeSelectorSubMenu />
+              <DropdownMenuItem asChild>
+                <Link href='/dashboard/profile'>
+                  Profile
+                </Link>
+              </DropdownMenuItem>
+              <ThemeSelectorSubMenu />
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>

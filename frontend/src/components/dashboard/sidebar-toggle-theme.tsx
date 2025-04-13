@@ -12,7 +12,6 @@ export const ThemeSelectorSubMenu = () => {
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>
         <Wrapper>
-          {theme === 'dark' ? <MoonIcon className="h-4" /> : <SunIcon className="h-4" />}
           <span>Theme</span>
         </Wrapper>
       </DropdownMenuSubTrigger>
