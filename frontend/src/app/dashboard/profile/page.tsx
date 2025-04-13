@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { PageHeader } from "@/components/layout/page-header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const profileSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -35,72 +37,75 @@ export default function ProfilePage() {
     setTimeout(() => setLoading(false), 1000);
   };
 
+  const breadcrumbs = [
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Profile', isCurrentPage: true },
+  ];
+
   return (
-    <div className="min-h-screen p-10 bg-gray-100">
-      <h2 className="text-2xl font-bold mb-6">Profile</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <Label htmlFor="name" className="mb-1.5">Name</Label>
-          <Input
-            id="name"
-            placeholder="Name"
-            {...register("name")}
-            className="border-black w-full md:w-[30%]"
-          />
-        </div>
+    <>
+      <PageHeader breadcrumbs={breadcrumbs} />
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <Card>
+          <CardHeader>
+            <CardTitle>Profile Settings</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Name"
+                  {...register("name")}
+                />
+              </div>
 
-        <div>
-          <Label htmlFor="email" className="mb-1.5">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="abc@gmail.com"
-            {...register("email")}
-            className="border-black w-full md:w-[30%]"
-          />
-        </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="abc@gmail.com"
+                  {...register("email")}
+                />
+              </div>
 
-        <div>
-          <Label htmlFor="password" className="mb-1.5">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="************"
-            {...register("password")}
-            className="border-black w-full md:w-[30%]"
-          />
-        </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="************"
+                  {...register("password")}
+                />
+              </div>
 
-        <div>
-          <Label className="mb-2">Role</Label>
-          <RadioGroup
-            defaultValue="student"
-            onValueChange={(value) => setValue("role", value as "student" | "teacher")}
-            className="flex flex-col space-y-2"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="student"
-                id="student"
-                className="border-black text-black data-[state=checked]:bg-black data-[state=checked]:border-black"
-              />
-              <Label htmlFor="student">Student</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="teacher"
-                id="teacher"
-                className="border-black text-black data-[state=checked]:bg-black data-[state=checked]:border-black"
-              />
-              <Label htmlFor="teacher">Teacher</Label>
-            </div>
-          </RadioGroup>
-        </div>
+              <div className="space-y-2">
+                <Label>Role</Label>
+                <RadioGroup
+                  defaultValue="student"
+                  onValueChange={(value) => setValue("role", value as "student" | "teacher")}
+                  className="flex flex-col space-y-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="student" id="student" />
+                    <Label htmlFor="student">Student</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="teacher" id="teacher" />
+                    <Label htmlFor="teacher">Teacher</Label>
+                  </div>
+                </RadioGroup>
+              </div>
 
-        <Button type="submit" disabled={loading} className="w-[130px] cursor-pointer">
-          {loading ? "Updating..." : "Update Profile"}
-        </Button>
-      </form>
-    </div>
+              <Button type="submit" disabled={loading}>
+                {loading ? "Updating..." : "Update Profile"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }

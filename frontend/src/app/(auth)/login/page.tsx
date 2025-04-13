@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
 
 const signInSchema = z.object({
   email: z
@@ -29,20 +30,18 @@ export default function SignIn() {
     clearErrors
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
-    mode: "onSubmit" // Validation will trigger only on submit
+    mode: "onSubmit"
   });
 
   const [loading, setLoading] = useState(false);
 
-  // Manually clear errors when user starts typing in the fields
   const handleInputChange = (fieldName: any) => {
-    clearErrors(fieldName); // Clear errors for the specific field
+    clearErrors(fieldName);
   };
 
   const onSubmit = async (data: SignInFormData) => {
     setLoading(true);
     try {
-      // Login Logic
       console.log("Signing in with", data);
     } catch (error) {
       console.error("Sign in failed", error);
@@ -52,19 +51,22 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="fixed top-5 right-5">
+        <DarkModeToggle />
+      </div>
+      <div className="w-full max-w-md p-6 bg-card rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center text-foreground">Sign In</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Input
               type="email"
               placeholder="Email"
               {...register("email")}
-              onChange={() => handleInputChange("email")} // Clear email error on input change
-              className={errors.email ? "border-red-500" : ""}
+              onChange={() => handleInputChange("email")}
+              className={errors.email ? "border-destructive" : ""}
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+            {errors.email && <p className="text-destructive text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
@@ -72,20 +74,20 @@ export default function SignIn() {
               type="password"
               placeholder="Password"
               {...register("password")}
-              onChange={() => handleInputChange("password")} // Clear password error on input change
-              className={errors.password ? "border-red-500" : ""}
+              onChange={() => handleInputChange("password")}
+              className={errors.password ? "border-destructive" : ""}
             />
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+            {errors.password && <p className="text-destructive text-sm mt-1">{errors.password.message}</p>}
           </div>
 
           <div className="flex justify-between">
             <div>
-              <Link href="/signup" className="text-sm text-blue-600 hover:underline">
+              <Link href="/signup" className="text-sm text-primary hover:underline">
                 Don't have an account?
               </Link>
             </div>
             <div>
-              <Link href="#" className="text-sm text-blue-600 hover:underline">
+              <Link href="#" className="text-sm text-primary hover:underline">
                 Forgot Password?
               </Link>
             </div>
@@ -95,7 +97,7 @@ export default function SignIn() {
             {loading ? (
               <span className="absolute inset-0 flex justify-center items-center">
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="animate-spin h-5 w-5 text-background"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"

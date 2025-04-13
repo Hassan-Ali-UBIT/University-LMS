@@ -7,6 +7,15 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 const signUpSchema = z.object({
   name: z
@@ -31,7 +40,8 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors
+    clearErrors,
+    setValue
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     mode: "onSubmit"
@@ -57,9 +67,12 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="fixed top-5 right-5">
+        <DarkModeToggle />
+      </div>
+      <div className="w-full max-w-md p-6 bg-card rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center text-foreground">Sign Up</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Input
@@ -67,10 +80,10 @@ export default function SignUp() {
               placeholder="Name"
               {...register("name")}
               onChange={() => handleInputChange("name")}
-              className={errors.name ? "border-red-500" : ""}
+              className={errors.name ? "border-destructive" : ""}
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+              <p className="text-destructive text-sm mt-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -80,10 +93,10 @@ export default function SignUp() {
               placeholder="Email"
               {...register("email")}
               onChange={() => handleInputChange("email")}
-              className={errors.email ? "border-red-500" : ""}
+              className={errors.email ? "border-destructive" : ""}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              <p className="text-destructive text-sm mt-1">{errors.email.message}</p>
             )}
           </div>
 
@@ -93,27 +106,30 @@ export default function SignUp() {
               placeholder="Password"
               {...register("password")}
               onChange={() => handleInputChange("password")}
-              className={errors.password ? "border-red-500" : ""}
+              className={errors.password ? "border-destructive" : ""}
             />
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+              <p className="text-destructive text-sm mt-1">{errors.password.message}</p>
             )}
           </div>
 
           <div>
-            <select
-              {...register("role")}
-              onChange={() => handleInputChange("role")}
-              className={`w-full p-2 border ${errors.role ? "border-red-500" : ""}`}
+            <Select
+              onValueChange={(value) => {
+                setValue("role", value as "student" | "teacher");
+                handleInputChange("role");
+              }}
             >
-              <option value="" disabled>
-                Select Role
-              </option>
-              <option value="student" defaultChecked>Student</option>
-              <option value="teacher">Teacher</option>
-            </select>
+              <SelectTrigger className={cn('w-full', errors.role ? "border-destructive" : "")}>
+                <SelectValue placeholder="Select Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="student">Student</SelectItem>
+                <SelectItem value="teacher">Teacher</SelectItem>
+              </SelectContent>
+            </Select>
             {errors.role && (
-              <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+              <p className="text-destructive text-sm mt-1">{errors.role.message}</p>
             )}
           </div>
 
@@ -121,7 +137,7 @@ export default function SignUp() {
             {loading ? (
               <span className="absolute inset-0 flex justify-center items-center">
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="animate-spin h-5 w-5 text-background"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -144,9 +160,9 @@ export default function SignUp() {
           </Button>
         </form>
         <div className="mt-4 text-center">
-          <p>
+          <p className="text-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="text-blue-600 hover:underline">
+            <Link href="/login" className="text-primary hover:underline">
               Sign In
             </Link>
           </p>
