@@ -1,6 +1,6 @@
 import { PageHeader } from '@/components/layout/page-header';
 
-export function DashboardPage() {
+export default function DashboardPage() {
   const breadcrumbs = [
     { label: 'Building Your Application', href: '#' },
     { label: 'Data Fetching', isCurrentPage: true },
