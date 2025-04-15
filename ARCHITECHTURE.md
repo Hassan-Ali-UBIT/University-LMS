@@ -141,8 +141,8 @@ UI Requirements:
   - POST /api/institutions/{id}/join-requests
   - GET /api/institutions/{id}/join-requests
   - GET /api/institutions/{id}/join-requests/{requestId}
-  - PUT /api/institutions/{id}/join-requests/{requestId}/approve
-  - PUT /api/institutions/{id}/join-requests/{requestId}/reject
+  - PATCH /api/institutions/{id}/join-requests/{requestId}/     [ pass status=approved in body approved ]
+  - PATCH /api/institutions/{id}/join-requests/{requestId}/     [ pass status=rejected in body rejected ]
 
 3. Course Endpoints:
   - POST /api/institutions/{id}/courses

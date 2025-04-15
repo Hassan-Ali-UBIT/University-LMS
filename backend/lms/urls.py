@@ -25,5 +25,6 @@ FIXED_ENDPOINT_PREFIX = "api/"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(FIXED_ENDPOINT_PREFIX + "auth/", include("users.urls")),
+    path(FIXED_ENDPOINT_PREFIX + "institutions/", include("institutions.urls")),
 
 ]

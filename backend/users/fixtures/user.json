@@ -1,0 +1,56 @@
+[
+{
+    "model": "users.user",
+    "pk": "3e8ec375-a94a-46f8-aae4-b03b8f8e46b9",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$YsSHMkfs3QFlq3KOrf5Z79$Aw+lrlLQ+LLmP1N3EEZ4zAa75iEUOpmb+m2v5AMVs/o=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-12T13:08:38.552Z",
+        "username": "Ali Hassan",
+        "email": "hassanali.tech25@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": "4afa507c-7a78-4a78-8c52-fa0c9b0683d8",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$Y2DaU1uJkFRCAMRwPzH3WP$AGWL3RiLne7eDTDUvpKl4ZecRtUfJxd7rd0TmmYRgOg=",
+        "last_login": "2025-04-12T12:48:15.861Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-12T12:47:37.184Z",
+        "username": "admin",
+        "email": "admin@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": "b8296dd4-938b-4451-a77f-9e8f73165842",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$pHy4dx9SY1nbGoq9NzHgaM$fFZ++NJPJbwJZTmJAdZFRfxKnzQImxxaRYHhSwozx40=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-12T12:56:27.043Z",
+        "username": "Ali Hassan",
+        "email": "alihassanftt@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
