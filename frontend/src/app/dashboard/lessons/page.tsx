@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 // Dummy data for lessons
 const dummyLessons = [
@@ -172,32 +173,34 @@ export default function LessonsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentLessons.map((lesson) => (
-          <Card key={lesson.id} className="overflow-hidden group">
-            <div className="relative h-48 overflow-hidden -mx-6 -mt-6">
-              <img
-                src={lesson.thumbnail}
-                alt={lesson.title}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <CardHeader>
-              <CardTitle>{lesson.title}</CardTitle>
-              <CardDescription>{lesson.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Progress</span>
-                  <span>{lesson.progress}%</span>
-                </div>
-                <Progress value={lesson.progress} className="h-2" />
-                <p className="text-sm text-muted-foreground">
-                  Duration: {lesson.duration}
-                </p>
+          <Link key={lesson.id} href={`/dashboard/lessons/${lesson.id}`}>
+            <Card className="overflow-hidden group cursor-pointer">
+              <div className="relative h-48 overflow-hidden -mx-6 -mt-6">
+                <img
+                  src={lesson.thumbnail}
+                  alt={lesson.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-            </CardContent>
-          </Card>
+              <CardHeader>
+                <CardTitle>{lesson.title}</CardTitle>
+                <CardDescription>{lesson.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Progress</span>
+                    <span>{lesson.progress}%</span>
+                  </div>
+                  <Progress value={lesson.progress} className="h-2" />
+                  <p className="text-sm text-muted-foreground">
+                    Duration: {lesson.duration}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
 
