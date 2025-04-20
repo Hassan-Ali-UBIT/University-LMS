@@ -171,16 +171,16 @@ UI Requirements:
 5. Comment Endpoints:
   - POST /api/lessons/{id}/comments
   - GET /api/lessons/{id}/comments
-  - PUT /api/comments/{id}
-  - DELETE /api/comments/{id}
-  - POST /api/comments/{id}/replies
-  - GET /api/comments/{id}/replies
+  - PUT /api/lessons/comments/{id}
+  - DELETE /api/lessons/comments/{id}
+  - POST /api/lessons/comments/{id}/replies
+  - GET /api/lessons/comments/{id}/replies
 
 6. Attendance Endpoints:
   - POST /api/attendance/track
   - GET /api/attendance/student/{id}
-  - GET /api/attendance/course/{id}
-  - GET /api/attendance/lesson/{id}                                   [ Already exists in course ]
+  - GET /api/attendance/course/{id}                                   [ Already exists in course ]
+  - GET /api/attendance/lesson/{id}                                   [ Already exists in lesson ]
   - GET /api/attendance/analytics
   - GET /api/attendance/export
 

@@ -9,6 +9,8 @@ from .models import (
     WatchSession, WatchSegment
 )
 
+from users.serializers import UserSerializer
+
 from .services import (
     WatchSessionService,
     WatchSegmentService,
@@ -65,8 +67,18 @@ class CommentSerializer(serializers.ModelSerializer):
             "lesson": {
                 "required": False,
                 "write_only": True,
-            }
+            },
+            "user": {
+                "required": False,
+            },
         }
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        representation["user"] = UserSerializer(instance.user).data
+
+        return representation
 
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
@@ -76,8 +88,16 @@ class ReplySerializer(serializers.ModelSerializer):
             "comment": {
                 "required": False,
                 "write_only": True,
-            }
+            },
+            "user": {
+                "required": False,
+            },
         }
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["user"] = UserSerializer(instance.user).data
+        return representation
 
 class WatchSessionSerializer(serializers.ModelSerializer):
     class Meta:

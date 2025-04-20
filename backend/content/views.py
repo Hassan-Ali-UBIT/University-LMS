@@ -9,6 +9,7 @@ from common.debug import print_parameters
 from common.cloudfare_utils import upload_file_to_r2
 # Create your views here.   
 from users.permissions import IsTeacher
+from users.services import RoleService
 
 from courses.permissions import (
     IsCourseOwner,
@@ -32,6 +33,8 @@ from .models import (
     LessonMaterial,
     WatchSegment,
     WatchSession,
+    Comment,
+    Reply,
 )
 
 from .serializers import (
@@ -253,7 +256,7 @@ class WatchSegmentAPIView(APIView):
 
 class AttendanceRecordAPIView(APIView):
     permission_classes = [IsTeacher | IsInstitutionAdminOfLesson]
-    
+
     def get(self, request, *args, **kwargs):
         lesson_id = kwargs.get("lesson_id")
 
@@ -265,3 +268,110 @@ class AttendanceRecordAPIView(APIView):
         attendance_record_serializer = AttendanceRecordSerializer(attendance_record, many=True)
 
         return Response({"data": attendance_record_serializer.data}, status=status.HTTP_200_OK)
+
+class LessonCommentAPIView(APIView):
+    permission_classes = [(IsCourseStudent | IsCourseOwner | IsInstitutionAdminOfCourse)]
+    def get(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+
+        # Fetch the comments from the database
+        comments = Comment.objects.filter(lesson=lesson_id)
+
+        # Serialize the comments
+        serializer = CommentSerializer(comments, many=True)
+
+        return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+
+        # Fetch the lesson from the database
+        lesson_instance = get_object_or_404(Lesson, id=lesson_id)
+
+        self.check_object_permissions(request, lesson_instance.course)
+        # Create a new comment
+        comment_serializer = CommentSerializer(data=request.data)
+        comment_serializer.is_valid(raise_exception=True)
+        comment_serializer.save(lesson=lesson_instance, user=request.user)
+
+        return Response({"data": comment_serializer.data}, status=status.HTTP_201_CREATED)
+    
+    def put(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+        comment_id = kwargs.get("comment_id")
+
+        # Fetch the lesson from the database
+        lesson_instance = get_object_or_404(Lesson, id=lesson_id)
+
+        self.check_object_permissions(request, lesson_instance.course)
+
+        # Fetch the comment from the database
+        user_role = request.user.userprofile.role
+
+        if user_role == RoleService.get_user_role():
+            comment_instance = get_object_or_404(Comment, id=comment_id, user=request.user)
+        else:
+            comment_instance = get_object_or_404(Comment, id=comment_id)
+        # Update the comment
+        serializer = CommentSerializer(comment_instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+    
+    def delete(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+        comment_id = kwargs.get("comment_id")
+
+        # Fetch the lesson from the database
+        lesson_instance = get_object_or_404(Lesson, id=lesson_id)
+
+        self.check_object_permissions(request, lesson_instance.course)
+
+        # Fetch the comment from the database
+        user_role = request.user.userprofile.role
+
+        if user_role == RoleService.get_user_role():
+            comment_instance = get_object_or_404(Comment, id=comment_id, user=request.user)
+        else:
+            comment_instance = get_object_or_404(Comment, id=comment_id)
+        
+        # Delete the comment
+        comment_instance.delete()
+
+        return Response({"message": "Comment deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+class CommentReplyAPIView(APIView):
+    permission_classes = [(IsCourseStudent | IsCourseOwner | IsInstitutionAdminOfCourse)]
+    def get(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+        comment_id = kwargs.get("comment_id")
+
+        # Fetch the replies from the database
+        replies = Reply.objects.filter(comment=comment_id)
+
+        # Serialize the replies
+        serializer = ReplySerializer(replies, many=True)
+
+        return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        lesson_id = kwargs.get("lesson_id")
+        comment_id = kwargs.get("comment_id")
+
+        # Fetch the lesson from the database
+        lesson_instance = get_object_or_404(Lesson, id=lesson_id)
+
+        self.check_object_permissions(request, lesson_instance.course)
+
+        # Fetch the comment from the database
+        comment_instance = get_object_or_404(Comment, id=comment_id)
+        
+        # Create a new reply
+        reply_serializer = ReplySerializer(data=request.data)
+        reply_serializer.is_valid(raise_exception=True)
+        reply_serializer.save(comment=comment_instance, user=request.user)
+
+        return Response({"data": reply_serializer.data}, status=status.HTTP_201_CREATED)
+
+
