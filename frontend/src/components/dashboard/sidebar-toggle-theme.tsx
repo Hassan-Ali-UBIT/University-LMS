@@ -25,7 +25,7 @@ export const ThemeSelectorSubMenu = () => {
             <SunIcon className="h-4" />
             <span>Light</span>
           </Wrapper>
-          {theme === 'light' && <CheckIcon className="h-4 text-green-500" />}
+          {theme === 'light' && <CheckIcon className="h-4 text-foreground" />}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -36,7 +36,7 @@ export const ThemeSelectorSubMenu = () => {
             <MoonIcon className="h-4" />
             <span>Dark</span>
           </Wrapper>
-          {theme === 'dark' && <CheckIcon className="h-4 text-green-500" />}
+          {theme === 'dark' && <CheckIcon className="h-4 text-foreground" />}
         </DropdownMenuItem>
       </DropdownMenuSubContent>
     </DropdownMenuSub>

@@ -23,7 +23,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-    SidebarRail,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 
 // This is sample data.
@@ -44,17 +44,17 @@ const data = {
   Navigations: [
     {
       name: "Instiution",
-      url: "#",
+      url: "/dashboard/institution",
       icon: Frame,
     },
     {
       name: "Courses",
-      url: "#",
+      url: "/dashboard/courses",
       icon: PieChart,
     },
     {
       name: "lessons",
-      url: "#",
+      url: "/dashboard/lessons",
       icon: Map,
     },
   ],
