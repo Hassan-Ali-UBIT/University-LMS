@@ -102,7 +102,6 @@ export default function Home() {
       {/* CTA Section */}
       <section
         className="bg-primary text-primary-foreground py-16 md:py-24 bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: "url('/cta-bg/cta.jpg')" }}
       >
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
@@ -115,15 +114,15 @@ export default function Home() {
             </p>
             <Button
               variant="secondary"
+              className="mt-6 cursor-pointer"
               size="lg"
-              className="mt-6 animate-pulse hover:animate-none cursor-pointer"
             >
               Start Free Trial
             </Button>
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
