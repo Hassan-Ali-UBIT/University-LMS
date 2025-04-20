@@ -28,5 +28,5 @@ urlpatterns = [
     path(FIXED_ENDPOINT_PREFIX + "institutions/", include("institutions.urls")),
     path(FIXED_ENDPOINT_PREFIX + "courses/", include("courses.urls")),
     path(FIXED_ENDPOINT_PREFIX + "lessons/", include("content.urls")),
-
+    path(FIXED_ENDPOINT_PREFIX + "attendance/", include("attendance.urls")),
 ]
