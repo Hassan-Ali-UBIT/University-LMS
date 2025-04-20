@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     InstitutionViewSet, InstitutionGenerateCodeAPIView,
     InstitutionJoinAPIView, InstitutionMemberAPIView,
-    InstitutionJoinRequestAPIView
+    InstitutionJoinRequestAPIView, InstitutionCoursesAPIView
 )
 
 router = DefaultRouter()
@@ -17,6 +17,7 @@ urlpatterns = [
     path('<str:institution_id>/members/<str:user_id>/', InstitutionMemberAPIView.as_view()),
     path('<str:institution_id>/join-requests/', InstitutionJoinRequestAPIView.as_view()),
     path('<str:institution_id>/join-requests/<str:request_id>/', InstitutionJoinRequestAPIView.as_view()),
+    path('<str:institution_id>/courses/', InstitutionCoursesAPIView.as_view()),
     path('', include(router.urls)),
     # path('institutions/join', JoinInstitutionViewSet.as_view({'post': 'join'}), name='join-institution'),
 ] 

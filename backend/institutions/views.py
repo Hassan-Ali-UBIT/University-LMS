@@ -6,6 +6,10 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from courses.permissions import IsCourseOwner
+from courses.models import Course
+from courses.serializers import CourseSerializer
+
 from users.models import User
 from users.services import RoleService
 from users.permissions import IsTeacher
@@ -27,7 +31,8 @@ from .services import (
 )
 from .permissions import (
     IsInstitutionAdminOrReadOnly,
-    IsInstitutionAdmin
+    IsInstitutionAdmin,
+    IsInstitutionMember,
 )
 
 # Create your views here.
@@ -235,4 +240,33 @@ class InstitutionJoinRequestAPIView(APIView):
         
         else:
             return Response({"message": "Request Rejected successfully"})
+
+class InstitutionCoursesAPIView(APIView):
+    permission_classes = [(IsTeacher | IsInstitutionAdmin)]
+    
+    def get(self, request, *args, **kwargs):
+        
+        institution_id = kwargs.get("institution_id")
+
+        course_queryset = Course.objects.filter(institution=institution_id)
+
+        course_queryset_serializer = CourseSerializer(course_queryset, many=True)
+
+        return Response({"data": course_queryset_serializer.data})
+    
+    def post(self, request, *args, **kwargs):
+
+        institution_id = kwargs.get("institution_id")
+
+        institution_instance = get_object_or_404(Institution, id=institution_id)
+
+        course_serializer = CourseSerializer(data=request.data)
+
+        course_serializer.is_valid(raise_exception=True)
+
+        course_serializer.save(institution=institution_instance, teacher=request.user)
+
+        return Response({"message": "Course Created Successfully"}, status=status.HTTP_201_CREATED)
+
+
 

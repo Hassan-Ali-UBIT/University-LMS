@@ -17,4 +17,8 @@ class IsTeacher(permissions.BasePermission):
 
         user = request.user
         return user.profile.role == RoleService.get_teacher_role()
+    
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+        return user.profile.role == RoleService.get_teacher_role()
 

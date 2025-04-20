@@ -150,8 +150,8 @@ UI Requirements:
   - GET /api/courses/{id}
   - PUT /api/courses/{id}
   - DELETE /api/courses/{id}
-  - POST /api/courses/{id}/enroll
   - GET /api/courses/{id}/students
+  - POST /api/courses/{id}/students                             [ for enrolling students ]
   - GET /api/courses/{id}/attendance
   - POST /api/courses/{id}/attendance/requirements
 

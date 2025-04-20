@@ -26,5 +26,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(FIXED_ENDPOINT_PREFIX + "auth/", include("users.urls")),
     path(FIXED_ENDPOINT_PREFIX + "institutions/", include("institutions.urls")),
+    path(FIXED_ENDPOINT_PREFIX + "courses/", include("courses.urls")),
 
 ]

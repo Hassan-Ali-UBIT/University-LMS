@@ -28,7 +28,7 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('id', 'name',)
     search_fields = ('name',)
 
 
