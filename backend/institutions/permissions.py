@@ -8,6 +8,9 @@ class IsInstitutionAdminOrReadOnly(permissions.BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request
+        if not request.user.is_authenticated:
+            return False
+        
         if request.method in permissions.SAFE_METHODS:
             return True
         
@@ -20,6 +23,10 @@ class IsInstitutionAdmin(permissions.BasePermission):
     """
     def has_permission(self, request, view):
         institution_id = view.kwargs.get("institution_id")
+
+        if not request.user.is_authenticated:
+            return False
+        
         if not institution_id and request.method in permissions.SAFE_METHODS:
             return True  # or True if you want to allow access in non-institution views
         
@@ -27,6 +34,7 @@ class IsInstitutionAdmin(permissions.BasePermission):
 
         if not institution_instance and  request.method in permissions.SAFE_METHODS:
             return True
+        
 
         return institution_instance.admin == request.user
 
@@ -47,6 +55,9 @@ class IsInstitutionAdminOfCourse(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # Check if user is admin of this institution
+        if not request.user.is_authenticated:
+            return False
+        
         return obj.institution.admin == request.user
         
 
@@ -54,5 +65,8 @@ class IsInstitutionMember(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # Check if user is admin of this institution
+        if not request.user.is_authenticated:
+            return False
+        
         return InstitutionMember.objects.filter(institution=obj, user=request.user).exists()
     

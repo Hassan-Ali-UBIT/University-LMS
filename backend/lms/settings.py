@@ -56,7 +56,7 @@ DEVELOPER_DEFINED_APP = [
     "content",
     "courses",
     "institutions",
-    "progress",
+    "attendance",
     "requests",
     "users",
 ]
@@ -245,3 +245,12 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
+
+# Cloudfare R2 Config
+
+R2_ACCOUNT_ID = os.getenv("R2_ACCOUNT_ID")
+R2_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID")
+R2_SECRET_ACCESS_KEY = os.getenv("R2_SECRET_ACCESS_KEY")
+R2_BUCKET_NAME = os.getenv("R2_BUCKET_NAME")
+R2_PUBLIC_DOMAIN = os.getenv("R2_PUBLIC_DOMAIN")
+R2_TEST_PUBLIC_DOMAIN = os.getenv("R2_TEST_PUBLIC_DOMAIN")

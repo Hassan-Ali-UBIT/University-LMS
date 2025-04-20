@@ -153,7 +153,7 @@ UI Requirements:
   - GET /api/courses/{id}/students
   - POST /api/courses/{id}/students                             [ for enrolling students ]
   - GET /api/courses/{id}/attendance
-  - POST /api/courses/{id}/attendance/requirements
+  - POST /api/courses/{id}/attendance/requirements              [ not needed as minimum attendance is passed in course creation and can be updated]
 
 4. Lesson Endpoints:
   - POST /api/courses/{id}/lessons
@@ -161,9 +161,10 @@ UI Requirements:
   - GET /api/lessons/{id}
   - PUT /api/lessons/{id}
   - DELETE /api/lessons/{id}
-  - POST /api/lessons/{id}/materials
   - GET /api/lessons/{id}/materials
-  - POST /api/lessons/{id}/watch-progress
+  - POST /api/lessons/{id}/materials
+  - POST /api/lessons/{id}/watch-session
+  - POST /api/lessons/{id}/watch-segments
   - GET /api/lessons/{id}/attendance
   - GET /api/lessons/{id}/watch-analytics
 
@@ -179,7 +180,7 @@ UI Requirements:
   - POST /api/attendance/track
   - GET /api/attendance/student/{id}
   - GET /api/attendance/course/{id}
-  - GET /api/attendance/lesson/{id}
+  - GET /api/attendance/lesson/{id}                                   [ Already exists in course ]
   - GET /api/attendance/analytics
   - GET /api/attendance/export
 

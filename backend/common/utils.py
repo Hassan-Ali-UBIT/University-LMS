@@ -96,3 +96,6 @@ def get_weekday_name(day_id):
 
 def get_month_name(month_id):
     return calendar.month_name[month_id]
+
+def time_to_seconds(t):
+    return t.hour * 3600 + t.minute * 60 + t.second

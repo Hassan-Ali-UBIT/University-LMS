@@ -6,6 +6,14 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from attendance.models import (
+    AttendanceRecord,
+)
+
+from attendance.serializers import (
+    AttendanceRecordSerializer,
+)
+
 from institutions.permissions import (
     IsInstitutionAdmin,
     IsInstitutionAdminOfCourse
@@ -134,5 +142,21 @@ class CourseLessonAPIView(APIView):
         lesson_serializer.save(course=course_instance)
 
         return Response({"data": lesson_serializer.data}, status=status.HTTP_201_CREATED)
-    
+
+class CourseAttendanceAPIView(APIView):
+    permission_classes = [(IsCourseOwner | IsInstitutionAdminOfCourse)]
+
+    def get(self, request, *args, **kwargs):
+        course_id = kwargs.get("course_id")
+
+        course_instance = get_object_or_404(Course, id=course_id)
+
+        self.check_object_permissions(request, course_instance)
+
+        attendance_records = AttendanceRecord.objects.filter(lesson__course=course_instance)
+        
+        attendance_serializer = AttendanceRecordSerializer(attendance_records, many=True)
+        
+        return Response({"data": attendance_serializer.data})
+
 

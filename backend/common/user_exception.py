@@ -30,3 +30,12 @@ def custom_exception_handler(exc, context):
     #     }
 
     return response
+
+
+def validate_file_size(file, MAX_FILE_SIZE_MB=10):
+    if file.size > MAX_FILE_SIZE_MB * 1024 * 1024:
+        raise CustomAPIException(
+            message=f"File size exceeds the maximum limit ({MAX_FILE_SIZE_MB} MB).",
+            status_code=400,
+        )
+    return file

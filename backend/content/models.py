@@ -56,3 +56,33 @@ class Reply(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class WatchSession(models.Model):
+    id = models.UUIDField(primary_key=True,
+                        default=uuid.uuid4,
+                        editable=False)
+    lesson = models.ForeignKey(Lesson,
+                            on_delete=models.CASCADE,
+                            related_name="watch_sessions")
+    student = models.ForeignKey(User,
+                                on_delete=models.CASCADE,
+                                related_name="watch_sessions")
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    watched_duration = models.PositiveIntegerField()
+    last_position = models.TimeField()
+    is_completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class WatchSegment(models.Model):
+    id = models.UUIDField(primary_key=True,
+                        default=uuid.uuid4,
+                        editable=False)
+    watch_session = models.ForeignKey(WatchSession, 
+                                    on_delete=models.CASCADE,
+                                    related_name="segments")
+    start_position = models.TimeField()
+    end_position = models.TimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
