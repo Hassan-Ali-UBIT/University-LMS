@@ -1,103 +1,130 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import { Footer } from "@/components/footer/footer";
+import { FEATURES, TESTIMONIALS } from "@/constants";
+import { CheckCircle } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="md:w-1/2 space-y-6 animate-fade-in">
+              <Badge variant="secondary" className="text-sm">
+                Next-Gen Learning Platform
+              </Badge>
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                Streamline Education with Smart Management
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Integrated LMS and attendance system for modern educational institutions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+                <Input placeholder="Enter your email" />
+                <Button size="lg" className="hover:scale-105 transition-transform">
+                  Get Started
+                </Button>
+              </div>
+            </div>
+            <div className="md:w-1/2">
+              <Image
+                src="/Images/hero.jpeg"
+                alt="Platform Preview"
+                width={1000}
+                height={400}
+                className="rounded-lg shadow-2xl border-2 border-primary/10 hover:shadow-3xl transition-shadow w-full object-cover"
+              />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in">
+            Key Features
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {FEATURES.map((feature) => (
+              <Card
+                key={feature.title}
+                className="hover:shadow-lg transition-shadow border border-muted hover:border-primary/20"
+              >
+                <CardHeader className="items-center">
+                  <feature.icon className="w-12 h-12 mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text" />
+                  <h3 className="text-2xl font-semibold">{feature.title}</h3>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-muted/50 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 animate-fade-in">
+            Trusted by Educators
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {TESTIMONIALS.map((testimonial) => (
+              <Card
+                key={testimonial.author}
+                className="p-6 border border-muted hover:border-primary/20 hover:shadow-lg transition-shadow"
+              >
+                <CardContent className="flex flex-col items-center text-center">
+                  <Avatar className="w-16 h-16 mb-4">
+                    <AvatarImage src={testimonial.avatar} />
+                    <AvatarFallback>{testimonial.author[0]}</AvatarFallback>
+                  </Avatar>
+                  <blockquote className="text-lg italic mb-4">
+                    {testimonial.text}
+                  </blockquote>
+                  <div className="font-medium">{testimonial.author}</div>
+                  <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section
+        className="bg-primary text-primary-foreground py-16 md:py-24 bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: "url('/cta-bg/cta.jpg')" }}
+      >
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
+            <CheckCircle className="w-16 h-16 mx-auto" />
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Ready to Transform Your Institution?
+            </h2>
+            <p className="text-lg text-primary-foreground/90">
+              Join hundreds of educational organizations using our platform
+            </p>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="mt-6 animate-pulse hover:animate-none cursor-pointer"
+            >
+              Start Free Trial
+            </Button>
+          </div>
+        </div>
+      </section>
+      <Footer/>
     </div>
   );
 }
+
