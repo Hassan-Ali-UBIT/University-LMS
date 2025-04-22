@@ -124,7 +124,7 @@ UI Requirements:
   - POST /api/auth/forgot-password
   - POST /api/auth/reset-password
   - GET /api/auth/me
-  - DELETE /api/auth/delete-account
+  - DELETE /api/auth/me
 
 2. Institution Endpoints:
   - POST /api/institutions
@@ -141,8 +141,8 @@ UI Requirements:
   - POST /api/institutions/{id}/join-requests
   - GET /api/institutions/{id}/join-requests
   - GET /api/institutions/{id}/join-requests/{requestId}
-  - PUT /api/institutions/{id}/join-requests/{requestId}/approve
-  - PUT /api/institutions/{id}/join-requests/{requestId}/reject
+  - PATCH /api/institutions/{id}/join-requests/{requestId}/     [ pass status=approved in body approved ]
+  - PATCH /api/institutions/{id}/join-requests/{requestId}/     [ pass status=rejected in body rejected ]
 
 3. Course Endpoints:
   - POST /api/institutions/{id}/courses
@@ -150,10 +150,10 @@ UI Requirements:
   - GET /api/courses/{id}
   - PUT /api/courses/{id}
   - DELETE /api/courses/{id}
-  - POST /api/courses/{id}/enroll
   - GET /api/courses/{id}/students
+  - POST /api/courses/{id}/students                             [ for enrolling students ]
   - GET /api/courses/{id}/attendance
-  - POST /api/courses/{id}/attendance/requirements
+  - POST /api/courses/{id}/attendance/requirements              [ not needed as minimum attendance is passed in course creation and can be updated]
 
 4. Lesson Endpoints:
   - POST /api/courses/{id}/lessons
@@ -161,25 +161,26 @@ UI Requirements:
   - GET /api/lessons/{id}
   - PUT /api/lessons/{id}
   - DELETE /api/lessons/{id}
-  - POST /api/lessons/{id}/materials
   - GET /api/lessons/{id}/materials
-  - POST /api/lessons/{id}/watch-progress
+  - POST /api/lessons/{id}/materials
+  - POST /api/lessons/{id}/watch-session
+  - POST /api/lessons/{id}/watch-segments
   - GET /api/lessons/{id}/attendance
   - GET /api/lessons/{id}/watch-analytics
 
 5. Comment Endpoints:
   - POST /api/lessons/{id}/comments
   - GET /api/lessons/{id}/comments
-  - PUT /api/comments/{id}
-  - DELETE /api/comments/{id}
-  - POST /api/comments/{id}/replies
-  - GET /api/comments/{id}/replies
+  - PUT /api/lessons/comments/{id}
+  - DELETE /api/lessons/comments/{id}
+  - POST /api/lessons/comments/{id}/replies
+  - GET /api/lessons/comments/{id}/replies
 
 6. Attendance Endpoints:
   - POST /api/attendance/track
   - GET /api/attendance/student/{id}
-  - GET /api/attendance/course/{id}
-  - GET /api/attendance/lesson/{id}
+  - GET /api/attendance/course/{id}                                   [ Already exists in course ]
+  - GET /api/attendance/lesson/{id}                                   [ Already exists in lesson ]
   - GET /api/attendance/analytics
   - GET /api/attendance/export
 

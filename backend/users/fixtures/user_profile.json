@@ -1,0 +1,24 @@
+[
+{
+    "model": "users.userprofile",
+    "pk": "37f0b4db-1df6-4740-86df-7f98416175a6",
+    "fields": {
+        "user": "3e8ec375-a94a-46f8-aae4-b03b8f8e46b9",
+        "role": "041c85b3-bb6e-422e-a738-f00e69d416ae",
+        "name": "Ali Hassan",
+        "created_at": "2025-04-12T13:08:39.096Z",
+        "updated_at": "2025-04-12T13:08:39.096Z"
+    }
+},
+{
+    "model": "users.userprofile",
+    "pk": "5574f65a-5c9b-4069-9d4a-a9ce87751a75",
+    "fields": {
+        "user": "b8296dd4-938b-4451-a77f-9e8f73165842",
+        "role": "041c85b3-bb6e-422e-a738-f00e69d416ae",
+        "name": "first here",
+        "created_at": "2025-04-12T12:56:27.681Z",
+        "updated_at": "2025-04-12T13:04:17.297Z"
+    }
+}
+]

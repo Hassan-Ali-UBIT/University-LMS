@@ -1,0 +1,26 @@
+[
+{
+    "model": "users.role",
+    "pk": "041c85b3-bb6e-422e-a738-f00e69d416ae",
+    "fields": {
+        "name": "user",
+        "created_at": "2025-04-12T12:52:12.376Z"
+    }
+},
+{
+    "model": "users.role",
+    "pk": "1ec705c9-e038-4090-b394-6c2b464e9d6b",
+    "fields": {
+        "name": "admin",
+        "created_at": "2025-04-12T12:44:28.919Z"
+    }
+},
+{
+    "model": "users.role",
+    "pk": "eba0df90-83ee-417c-a5f5-e007a49ac6a4",
+    "fields": {
+        "name": "teacher",
+        "created_at": "2025-04-12T12:52:22.065Z"
+    }
+}
+]
