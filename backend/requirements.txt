@@ -6,8 +6,13 @@ django-after-response==0.2.2
 django-cors-headers==4.7.0
 djangorestframework==3.15.2
 djangorestframework_simplejwt==5.5.0
+gunicorn==23.0.0
 jmespath==1.0.1
+packaging==25.0
 pillow==11.1.0
+psycopg==3.2.6
+psycopg-binary==3.2.6
+psycopg-pool==3.2.6
 psycopg2==2.9.10
 psycopg2-binary==2.9.10
 PyJWT==2.9.0
@@ -17,4 +22,6 @@ ruff==0.11.2
 s3transfer==0.11.5
 six==1.17.0
 sqlparse==0.5.3
+typing_extensions==4.13.2
 urllib3==2.4.0
+whitenoise==6.9.0
