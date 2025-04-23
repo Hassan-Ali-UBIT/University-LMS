@@ -205,6 +205,13 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["*"]
 
+# CSRF Config
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "https://ubit-lms.vercel.app",
+    "https://university-lms-production.up.railway.app",
+]
+
 
 LOGGING = {
     "version": 1,
@@ -253,6 +260,7 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 
 # Cloudfare R2 Config
+# ===================
 
 R2_ACCOUNT_ID = os.getenv("R2_ACCOUNT_ID")
 R2_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID")
